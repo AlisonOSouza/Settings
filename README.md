@@ -3,9 +3,9 @@ Neste repositório estão salvas configurações, informações e lembretes sobr
 
 
 ##### [Windows 10] Corrigir GRUB após instalação/atualização do Windows 10 dual boot UEFI
+Abra o prompt de comando como administrador e execute:
 ```
-1 - Abra o prompt de comando como administrador
-2 - bcdedit /set {bootmgr} path \EFI\ubuntu\grubx64.efi
+bcdedit /set {bootmgr} path \EFI\ubuntu\grubx64.efi
 ```
 
 ##### [Elementary OS] Lentidão após digitar login e senha.   
