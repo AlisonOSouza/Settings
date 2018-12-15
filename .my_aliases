@@ -1,0 +1,26 @@
+## Alias definitions
+## In this archive are some aliases definitions
+## Author: Alison Souza
+
+## Add this lines on rc file from your shell:
+#if [ -f ~/.my_aliases ]; then
+#    . ~/.my_aliases
+#fi
+
+
+## Utils
+alias atualizar='sudo apt update && sudo apt upgrade'
+alias dcc_ssh='ssh alison.souza@login.dcc.ufmg.br'
+alias nano='nano --smarthome --historylog --tabsize=4 --autoindent --linenumbers'
+
+
+## Programs
+alias android_studio='/usr/local/android-studio/bin/studio.sh'
+alias jupyter-notebook='/home/alison/anaconda3/bin/jupyter-notebook'
+alias jupyter-lab='/home/alison/anaconda3/bin/jupyter-lab'
+
+## Folders
+alias POC='cd ~/Matérias/POC/'
+alias PC='cd ~/Matérias/Programação\ Competitiva/'
+alias PDI='cd ~/Matérias/PDI/'
+alias COMP='cd ~/Matérias/Compiladores/'

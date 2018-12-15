@@ -29,7 +29,7 @@ apt upgrade -y
 echo "*********************************************************************************"
 echo "**********                    Instalando Utilitários                   **********"
 echo "*********************************************************************************"
-apt install apt-transport-https ubuntu-restricted-extras software-properties-common software-properties-gtk gdebi -y
+apt install apt-transport-https ubuntu-restricted-extras software-properties-common software-properties-gtk gdebi git zsh -y
 
 echo "*********************************************************************************"
 echo "**********          Gparted, Monitor, Htop, Pinta, Terminator          **********"
@@ -37,14 +37,18 @@ echo "**************************************************************************
 apt install gparted gnome-system-monitor htop pinta terminator -y
 
 echo "*********************************************************************************"
-echo "**********              Sublime Text e Visual Studio Code              **********"
+echo "**********        Sublime Text, Visual Studio Code e Oh-My-Zsh         **********"
 echo "*********************************************************************************"
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
 echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
+
 wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add -
 add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+
 apt update -y
 apt install sublime-text code -y
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 echo "*********************************************************************************"
 echo "**********             Elementary Tweaks e Grub Customizer             **********"
@@ -65,16 +69,16 @@ echo "**********                         Virtual Box                         ***
 echo "*********************************************************************************"
 apt install virtualbox virtualbox-ext-pack -y
 
-echo "*********************************************************************************"
-echo "**********                         WPS Office                          **********"
-echo "*********************************************************************************"
+# echo "*********************************************************************************"
+# echo "**********                         WPS Office                          **********"
+# echo "*********************************************************************************"
 ## E' necessario verificar se o link abaixo esta atualizado,
-## porque nao ha um link generico como ha no Chrome.
-wget -O wps-office.deb http://kdl.cc.ksosoft.com/wps-community/download/6757/wps-office_10.1.0.6757_amd64.deb
-apt install ./wps-office.deb -y
+## porque nao ha' um link generico como ha' para o Chrome.
+# wget -O wps-office.deb http://kdl.cc.ksosoft.com/wps-community/download/6757/wps-office_10.1.0.6757_amd64.deb
+# apt install ./wps-office.deb -y
 ## Traducao WPS para PT-BR
-wget -O wps-translation-PT_BR.deb http://download870.mediafire.com/7rscql2ipotg/36td09x94m2x4vh/wps-office-mui-pt-br_1.1.0-0kaiana1_all.deb
-apt install ./wps-translation-PT_BR.deb -y
+# wget -O wps-translation-PT_BR.deb http://download870.mediafire.com/7rscql2ipotg/36td09x94m2x4vh/wps-office-mui-pt-br_1.1.0-0kaiana1_all.deb
+# apt install ./wps-translation-PT_BR.deb -y
 
 echo "*********************************************************************************"
 echo "**********                  Pacotes de ícones e temas                  **********"
