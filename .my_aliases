@@ -24,3 +24,10 @@ alias POC='cd ~/Matérias/POC/'
 alias PC='cd ~/Matérias/Programação\ Competitiva/'
 alias PDI='cd ~/Matérias/PDI/'
 alias COMP='cd ~/Matérias/Compiladores/'
+
+## Docker
+alias deti='docker exec -ti'
+alias dpsa='docker ps -a'
+alias dia='docker images -a'
+alias dr='docker restart'
+
