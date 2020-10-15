@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# Comando pra apagar tudo que instalou.
-# sudo apt purge paper-icon-theme oranchelo-icon-theme papirus-icon-theme arc-theme sublime-text code wps-office-mui-pt-br wps-office virtualbox-ext-pack virtualbox-dkms virtualbox-qt virtualbox google-chrome-stable grub-customizer elementary-tweaks terminator pinta htop gnome-system-monitor gparted gdebi software-properties-gtk software-properties-common ubuntu-restricted-extras apt-transport-https
-
 ## Criado por Alison Souza.
-
 ## Este script contem comandos para a instalacao de algumas ferramentas
-## que utilizo. Para isso, e' necessario executar como root
+## que utilizo. Para isso, é necessario executar como root
 if ! [ $(id -u) = 0 ]; then
 	echo "Este script precisa ser executado como root." >&2
 	exit 1
 fi
+
+# Comando pra apagar tudo que instalou.
+# sudo apt purge paper-icon-theme oranchelo-icon-theme papirus-icon-theme arc-theme sublime-text code wps-office-mui-pt-br wps-office virtualbox-ext-pack virtualbox-dkms virtualbox-qt virtualbox google-chrome-stable grub-customizer elementary-tweaks terminator pinta htop gnome-system-monitor gparted gdebi software-properties-gtk software-properties-common ubuntu-restricted-extras apt-transport-https
+
 
 ## Para remover pacotes PPA instalados:
 	## sudo add-apt-repository --remove ppa:PACKAGE
@@ -29,15 +29,15 @@ apt upgrade -y
 echo "*********************************************************************************"
 echo "**********                    Instalando Utilitários                   **********"
 echo "*********************************************************************************"
-apt install apt-transport-https ubuntu-restricted-extras software-properties-common software-properties-gtk gdebi git zsh -y
+apt install apt-transport-https ubuntu-restricted-extras software-properties-common software-properties-gtk net-tools gdebi git zsh vim wget htop -y
 
 echo "*********************************************************************************"
-echo "**********          Gparted, Monitor, Htop, Pinta, Terminator          **********"
+echo "**********        Gparted, Monitor, Pinta, Terminator, Flameshot       **********"
 echo "*********************************************************************************"
-apt install gparted gnome-system-monitor htop pinta terminator -y
+apt install gparted gnome-system-monitor pinta terminator flameshot -y
 
 echo "*********************************************************************************"
-echo "**********        Sublime Text, Visual Studio Code e Oh-My-Zsh         **********"
+echo "**********              Sublime Text e Visual Studio Code              **********"
 echo "*********************************************************************************"
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
 echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
@@ -48,21 +48,46 @@ add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode
 apt update -y
 apt install sublime-text code -y
 
+echo "*********************************************************************************"
+echo "**********                 Oh-My-Zsh e Powerline Fonts                  **********"
+echo "*********************************************************************************"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+apt-get install fonts-powerline
 
 echo "*********************************************************************************"
-echo "**********             Elementary Tweaks e Grub Customizer             **********"
+echo "**********                            Docker                           **********"
+echo "*********************************************************************************"
+# Adicionando chave GPG.
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+# Adicionando repositório do Docker no sistema.
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+# Atualiza os pacotes e instala.
+apt update
+apt install docker-ce
+# Adicionando usuário ao grupo 'docker' para não precisar usar sudo toda vez.
+groupadd docker
+usermod -aG docker ${USER}
+
+echo "*********************************************************************************"
+echo "**********   Elementary Tweaks, Grub Customizer, Remmina, FileZilla    **********"
 echo "*********************************************************************************"
 add-apt-repository ppa:philip.scott/elementary-tweaks
 add-apt-repository ppa:danielrichter2007/grub-customizer
-apt update -y
-apt install elementary-tweaks grub-customizer -y
+add-apt-repository ppa:remmina-ppa-team/remmina-next
+apt update
+apt install elementary-tweaks grub-customizer remmina remmina-plugin-rdp remmina-plugin-secret filezilla -y
 
 echo "*********************************************************************************"
 echo "**********                        Google Chrome                        **********"
 echo "*********************************************************************************"
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 apt install ./google-chrome-stable_current_amd64.deb -y
+
+echo "*********************************************************************************"
+echo "**********                           Discord                           **********"
+echo "*********************************************************************************"
+wget -O discord-0.0.1.deb https://discordapp.com/api/download?platform=linux&format=deb
+apt install ./discord-0.0.1.deb -y
 
 echo "*********************************************************************************"
 echo "**********                         Virtual Box                         **********"
@@ -72,8 +97,8 @@ apt install virtualbox virtualbox-ext-pack -y
 # echo "*********************************************************************************"
 # echo "**********                         WPS Office                          **********"
 # echo "*********************************************************************************"
-## E' necessario verificar se o link abaixo esta atualizado,
-## porque nao ha' um link generico como ha' para o Chrome.
+## É necessario verificar se o link abaixo esta atualizado,
+## porque nao há um link generico como há para o Chrome.
 # wget -O wps-office.deb http://kdl.cc.ksosoft.com/wps-community/download/6757/wps-office_10.1.0.6757_amd64.deb
 # apt install ./wps-office.deb -y
 ## Traducao WPS para PT-BR
@@ -81,18 +106,18 @@ apt install virtualbox virtualbox-ext-pack -y
 # apt install ./wps-translation-PT_BR.deb -y
 
 echo "*********************************************************************************"
-echo "**********                  Pacotes de ícones e temas                  **********"
+echo "**********        Pacotes de ícones e temas para o ElementaryOS        **********"
 echo "*********************************************************************************"
-## Paper icon
+# Paper icon
 add-apt-repository ppa:snwh/ppa
-## Oranchelo icon
+# Oranchelo icon
 add-apt-repository ppa:oranchelo/oranchelo-icon-theme
-## Papirus icon
+# Papirus icon
 add-apt-repository ppa:papirus/papirus
 
 apt update -y
 apt install paper-icon-theme oranchelo-icon-theme papirus-icon-theme -y
-## Arc Theme
+# Arc Theme
 apt install arc-theme -y
 
 ############################# Apagando a pasta temporaria ##############################
